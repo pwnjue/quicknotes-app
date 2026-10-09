@@ -7,10 +7,8 @@ const noteCount = document.querySelector("#note-count");
 const errorMessage = document.querySelector("#error-message");
 const searchInput = document.querySelector("#search-input");
 
-// Store notes in an array
 let notes = [];
 
-// Display notes on the page
 function render() {
     notesList.textContent = "";
 
@@ -33,6 +31,14 @@ function render() {
         deleteButton.textContent = "Delete";
         deleteButton.type = "button";
 
+        deleteButton.addEventListener("click", function() {
+            notes = notes.filter(function(item) {
+                return item.id !== note.id;
+            });
+
+            render();
+        });
+
         listItem.appendChild(noteText);
         listItem.appendChild(categoryLabel);
         listItem.appendChild(document.createElement("br"));
@@ -52,7 +58,6 @@ function render() {
     }
 }
 
-// Add a new note
 noteForm.addEventListener("submit", function(event) {
     event.preventDefault();
 
@@ -84,5 +89,4 @@ noteForm.addEventListener("submit", function(event) {
     render();
 });
 
-// Initial display
 render();
